@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E_Commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
+    <style>
+        .navbar {
+            background-color: white !important;
+/*             border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+ */        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light p-2 fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-couch"></i> E-Commerce </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item"><a class="nav-link mx-2 active" aria-current="page" asp-action="index" asp-controller="Home">Home</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2" asp-action="index" asp-controller="Product">Products</a></li> 
+                    <li class="nav-item"><a class="nav-link mx-2" asp-action="about" asp-controller="about">About</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="#footer">Contact Us</a></li>
+                    
+                </ul>
+                <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
+                    <li class="nav-item mx-1">
+                        <a class="nav-link text-dark h5" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            @if (User.Identity.IsAuthenticated != true || !User.IsInRole("Admin"))
+                            {
+                                <a class="dropdown-item" asp-action="login" asp-controller="account">Sign In</a>
+                                <a class="dropdown-item" asp-action="register" asp-controller="account">Create New Profile</a>
+                            }
+                            else
+                            {
+                                <h4 class="dropdown-item" >Welcome @User.Identity.Name</h4>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                <a class="dropdown-item" asp-action="registeradmin" asp-controller="account">Register New Admin</a>
+                                }
+                                <a class="dropdown-item" asp-action="signout" asp-controller="account">Sign Out</a>
+
+                            }
+
+                        </div>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link text-dark h5" asp-action="index" asp-controller="Cart" target="_blank">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <main role="main" class="pb-3 my-5">
+            <div class="my-5">
+                <div class="my-s">
+            @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="text-center text-lg-start text-white" style="background-color: #1c1c1c" id="footer">
+        <div class="container p-4 pb-0">
+            <section class="">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold"><i class="fa-solid fa-couch"></i> ASAS </h6>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, labore et dolore magna aliqua. Ut enim ad minim veniam </p>
+                    </div>
+                    <hr class="w-100 clearfix d-md-none" />
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                        <p><a class="text-white">Bedrooms</a></p>
+                        <p><a class="text-white">Tables</a></p>
+                        <p><a class="text-white">Chaires</a></p>
+                        <p> <a class="text-white">Living rooms</a></p>
+                    </div>
+                    <hr class="w-100 clearfix d-md-none" />
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Useful links </h6>
+                        <p><a class="text-white">Your Account</a></p>
+                        <p><a class="text-white">About</a> </p>
+                        <p><a class="text-white">Contact Us</a></p>
+                    </div>
+                    <hr class="w-100 clearfix d-md-none" />
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p><i class="fas fa-home mr-3"></i> Cairo, Nasr City, EGYPT</p>
+                        <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+                        <p><i class="fas fa-phone mr-3"></i> + 01 111 222 33</p>
+                    </div>
+                </div>
+            </section>
+            <hr class="my-3">
+            <section class="p-3 pt-0">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                        <div class="p-3"> © 2024 Copyright</div>
+                    </div>
+                    <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                        <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="fab fa-google"></i></a>
+                        <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

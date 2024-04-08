@@ -1,0 +1,26 @@
+﻿@model E_Commerce.Models.Product
+
+@{
+
+}
+
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    
+    <div class="card">
+        <div class="card-header">
+            Confirmation Request
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are You Sure to Delete @Model.Name ?</h5>
+            <a asp-action="delete" asp-controller="Product" asp-route-Id="@Model.Id"  class="btn btn-primary">Yes</a>
+            <a asp-action="index" asp-controller="Product" asp-route-Id="@Model.Id" class="btn btn-primary">Cancel</a>
+
+        </div>
+    </div>
+
+
+</div>
+

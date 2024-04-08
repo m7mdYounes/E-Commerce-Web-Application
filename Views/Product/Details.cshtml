@@ -1,0 +1,116 @@
+﻿@model Product
+<style>
+    .navbar {
+        background-color: white !important;
+        border-bottom: 1px solid black;
+    }
+
+    .btn-coffee {
+        background-color: #A52A2A;
+        color: #FFFFFF;
+    }
+
+    .card {
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+    }
+
+    body {
+        padding-top: 100px;
+    }
+</style>
+<div class="container my-5" id="productDetailsContainer" style="margin-bottom: 300px;">
+    <div class="card mx-auto my-5 shadow-2-strong">
+        <div class="row g-0">
+            <div class="col-md-4">
+                @* <img src="~/images/@Model.image" id="productImage" class="card-img-top" alt="Product Image" style="height: 300px; width: 100%; object-fit: cover;"> *@
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 id="productTitle" class="card-title">@Model.Name</h1>
+                    <p id="productdescription" class="card-text mt-0 large">@Model.Description</p>
+                    <p id="productrating" class="card-text mt-0 small">@Model.rating</p>
+                    <h4 id="productPrice" class="card-text">@Model.price</h4>
+
+                    <div class="form-outline">
+                        <label class="form-label" for="form1">
+                            Quantity
+                            <input id="form1" min="0" name="quantity" value="1" max="@Model.quantity" type="number" class="form-control w-75" />
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-end pt-5 px-0 pb-0 mt-auto">
+                     @*    <form asp-action="AddToCart" asp-controller="Cart" asp-route-Id="@Model.Id" method="post" class="me-2">
+                            <button type="submit" class="btn btn-coffee shadow-0 addToCart">Add to cart</button>
+                        </form> *@
+                        <form asp-action="AddToCart" asp-controller="Cart" method="post" class="me-2">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-coffee shadow-0 addToCart">Add to Cart</button>
+                        </form>
+
+@*                         <a href="#!" class="btn btn-coffee shadow-0 me-2 addToCart">Add to cart</a>
+    
+ *@                     @if (User.IsInRole("Admin"))
+                        {
+                            <form asp-action="editprd" asp-controller="Product" asp-route-Id="@Model.Id" method="get" class="me-2">
+                                <button type="submit" class="btn btn-coffee shadow-0 addToCart">Edit</button>
+                            </form>
+                            <form asp-action="deleteprd" asp-controller="Product" asp-route-Id="@Model.Id" method="get">
+                                <button type="submit" class="btn btn-coffee shadow-0 addToCart">Delete</button>
+                        </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div class="container my-5" id="productDetailsContainer" style="margin-bottom: 300px;">
+    <div class="card mx-auto my-5 shadow-2-strong">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="~/images/@Model.image" id="productImage" class="card-img-top" alt="Product Image" style="height: 300px; width: 100%; object-fit: cover;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 id="productTitle" class="card-title">@Model.Name</h1>
+                    <p id="productdescription" class="card-text mt-0 large">@Model.Description</p>
+                    <p id="productrating" class="card-text mt-0 small">@Model.rating</p>
+                    <h4 id="productPrice" class="card-text">@Model.price</h4>
+
+                    <div class="form-outline">
+                        <label class="form-label" for="form1">
+                            Quantity
+                            <input id="form1" min="0" name="quantity" value="1" max="@Model.quantity" type="number" class="form-control w-75" />
+                        </label>
+                    </div>
+
+                    <div class="d-flex align-items-end pt-5 px-0 pb-0 mt-auto">
+                        <form asp-action="editprd" asp-controller="Product" asp-route-Id="@Model.Id" method="get">
+                            <button type="submit" class="btn btn-coffee shadow-0 me-5 addToCart w-50">Edit</button>
+                        </form>
+                    </div>
+
+                    <div class="d-flex align-items-end pt-5 px-0 pb-0 mt-auto">
+                        <form asp-action="addtocart" asp-controller="Cart" method="post">
+                            <button type="submit" class="btn btn-coffee shadow-0 me-5 addToCart w-50">Add to cart</button>
+                        </form>
+                        <form asp-action="addtocart" asp-controller="Product" asp-route-Id="@Model.Id" method="post">
+                            <button type="submit" class="btn btn-light border px-2 pt-2 icon-hover toggleLike">
+                                <i class="fas fa-heart fa-lg text-secondary px-1"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="d-flex align-items-end pt-5 px-0 pb-0 mt-auto">
+                        <form asp-action="deleteprd" asp-controller="Product" asp-route-Id="@Model.Id" method="get">
+                            <button type="submit" class="btn btn-coffee shadow-0 me-5 addToCart w-50">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ *@

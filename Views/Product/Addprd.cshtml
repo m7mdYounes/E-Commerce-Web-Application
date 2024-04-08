@@ -1,0 +1,90 @@
+﻿@model E_Commerce.Models.Product
+
+@{
+    // SelectList cats = new SelectList(ViewBag?.Cats, "Id", "Name");
+
+}
+
+
+<style>
+    .navbar {
+        background-color: white !important;
+        border-bottom: 1px solid black;
+    }
+
+    body {
+        padding-top: 60px;
+        background-color: #f8f9fa;
+    }
+
+    button {
+        font-size: 16px;
+        margin-top: 20px;
+        width: 150px;
+        margin-right: 10px;
+    }
+
+    .btn-coffee {
+        background-color: #A52A2A;
+        color: #FFFFFF;
+    }
+</style>
+<main id="loginMain" class="register min-vh-100 d-flex align-items-center">
+    <section class="container register-area w-75 p-4">
+        <div class="row">
+            <div class="col-sm-6 m-auto">
+                <form asp-action="Addprd">
+                    <div class="form-group">
+                        <div class="card shadow p-4">
+                            <h2 class="text-center fs-3 mb-4"><i class="fa-solid fa-user" style="color: #000000;"></i> Create Product </h2>
+                            <div id="allInputsRequired" class="w-75 m-auto text-center fs-5 d-none"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control form-control-lg rounded-pill" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control form-control-lg rounded-pill" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label asp-for="price" class="control-label"></label>
+                        <input asp-for="price" class="form-control form-control-lg rounded-pill" />
+                        <span asp-validation-for="price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="rating" class="control-label"></label>
+                        <input asp-for="rating" class="form-control form-control-lg rounded-pill" />
+                        <span asp-validation-for="rating" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="quantity" class="control-label"></label>
+                        <input asp-for="quantity" class="form-control form-control-lg rounded-pill" />
+                        <span asp-validation-for="quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="catalogueID">Catalogue</label>
+                        <select asp-for="catalogueID" asp-items="ViewBag.Cats" class="form form-control form-control-lg rounded-pill">
+                            <option value="0" selected>Select - Catalogue</option>
+                        </select>
+                        <span asp-validation-for="catalogueID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-coffee px-4 mt-2" />
+                        <a asp-action="Index" class="btn btn-coffee px-4 mt-2">Back to List</a>
+                    </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
